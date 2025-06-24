@@ -50,19 +50,20 @@ public class CursoController {
     public ResponseEntity<String> crearCurso(@RequestBody Curso curso){
         String resultado = cursoservice1.crearCurso(curso);
         if (resultado != null) {
-            return ResponseEntity.ok(resultado);
+            return ResponseEntity.status(201).body(resultado);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().body("Error al crear el curso. Verifica los datos proporcionados.");
     }
 
 
     @Operation(summary = "Eliminar un curso por ID")
     @DeleteMapping("/cursos/{id}")
     public ResponseEntity<String> borrarCurso(@PathVariable int id){
-        if (cursoservice1.borrarCurso(id) != null) {
-            return ResponseEntity.ok(cursoservice1.borrarCurso(id));
-        }
+        String resultado = cursoservice1.borrarCurso(id);
+            if (resultado == null) {
         return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(resultado);
     }
 
 
@@ -72,7 +73,7 @@ public class CursoController {
         if (cursoservice1.modificarCurso(curso) != null) {
             return ResponseEntity.ok(cursoservice1.modificarCurso(curso));
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().body("Error al modificar el curso. Verifica los datos proporcionados.");
     }
 
 

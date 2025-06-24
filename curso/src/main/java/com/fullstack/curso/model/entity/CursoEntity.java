@@ -16,6 +16,7 @@ public class CursoEntity {
 
     private String nombre;
     private String nombre_docente;
+    private String rut_docente;
     private Date fecha_inicio;
     private Date fecha_fin;
     private String descripcion;
